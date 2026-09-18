@@ -1,6 +1,5 @@
 body{
     font-family: "Montserrat", sans-serif;
-  
     margin: 0;
     background-color: #000;
     color: #fff;
@@ -17,9 +16,8 @@ body{
     background-color: black;
     border-radius: 1rem;   /*  16px */
     width: 340px;
-    margin-right: 0.5rem ;
+    margin-right: 0.5rem;
 }
-
 
 .main-content{
     background-color:#121212;
@@ -32,8 +30,14 @@ body{
     background-color: black;
     position: fixed;
     bottom: 0px;
-     width: 100%;
+    width: 100%;
     height: 72px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 1rem;
+    box-sizing: border-box;
+    z-index: 1000;
 }
 
 a{
@@ -41,30 +45,29 @@ a{
     color: #fff;
 }
 
-
 .nav {
-     background-color: #121212; 
-       border-radius: 1rem;
-       display: flex;
-       flex-direction: column;
-       justify-content: center;
-       height: 100px;
-       padding:0.5rem 0.5rem ;
+    background-color: #121212; 
+    border-radius: 1rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 100px;
+    padding:0.5rem 0.5rem;
 }
 
 .nav-option{
     line-height: 2.5rem;
     opacity: 0.5;
     padding:0.5rem 0.75rem;
-   
 }
+
 .nav-option:hover{
     opacity: 1;
 }
 
 .nav-option a {
- font-size: 1rem;
- margin-left: 1rem;
+    font-size: 1rem;
+    margin-left: 1rem;
 }
 
 .nav-option i{
@@ -74,9 +77,10 @@ a{
 .library{
     background-color: #121212;
     border-radius: 1rem;
-    height: 100vh;
-    margin-top:0.5rem ;
+    height: calc(100vh - 120px);
+    margin-top:0.5rem;
     padding: 0.5rem 0.75rem;
+    overflow-y: auto;
 }
 
 .options{
@@ -97,9 +101,9 @@ a{
 }
 
 .icons i{
-     opacity: 0.7;
-   
+    opacity: 0.7;
     margin-right: 1rem;
+    cursor: pointer;
 }
 
 .icons i:hover{
@@ -133,6 +137,7 @@ a{
     margin-top: 0.5rem;
     height: 2rem;
     width: fit-content;
+    cursor: pointer;
 }
 
 .dark-badge{
@@ -140,17 +145,16 @@ a{
     color: white;
 }
 
-
 .sticky-nav{
-   position: sticky;
-   top: 0;
-   background-color: #121212;
-   display: flex;
-   justify-content: space-between;
-   align-content: center;
-   padding: 1rem 0 1rem 0;
+    position: sticky;
+    top: 0;
+    background-color: #121212;
+    display: flex;
+    justify-content: space-between;
+    align-content: center;
+    padding: 1rem 0 1rem 0;
+    z-index: 10;
 }
-
 
 .sticky-nav-icon {
     font-size: 2rem;
@@ -162,11 +166,10 @@ a{
     display: flex;
     justify-content: center;
     align-items: center;
-    
 }
 
 .nav-item{
-   margin-right: 1rem; 
+    margin-right: 1rem; 
 }
 
 @media(max-width:1000px){
@@ -175,20 +178,28 @@ a{
     }
 }
 
-
 .card{
     background-color: #232323;
     width: 150px;
     border-radius: 0.5rem;
     padding: 1rem;
-
     margin-left: 1.5rem;
-   
+    margin-bottom: 1.5rem;
+    cursor: pointer;
+    transition: transform 0.2s, background-color 0.2s;
+}
 
+.card:hover{
+    background-color: #2a2a2a;
+    transform: translateY(-4px);
+}
+
+.card.playing{
+    border: 1px solid #1bd760;
+    box-shadow: 0 0 10px rgba(27, 215, 96, 0.4);
 }
 
 .card-container{
-
     display: flex;
     flex-wrap: wrap;
 }
@@ -196,90 +207,148 @@ a{
 .card-img{
     width: 100%;
     border-radius: 0.5rem;
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
 }
 
 .card-tittle{
     font-weight: 600;
+    margin: 0.5rem 0 0.25rem 0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .card-info{
     font-size: 0.75rem;
     opacity: 0.8;
     font-weight: 300;
-
+    margin: 0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
-
 .footer{
-    height: 300px;
+    height: 180px;
 }
 
 .line{
-   width: 90%;
-   height: 30%;
-   border-top: 1px solid white; 
+    width: 90%;
+    height: 30%;
+    border-top: 1px solid rgba(255, 255, 255, 0.2); 
 }
 
-.music-player{
+/* Music Player Controls */
+.album {
+    width: 25%;
     display: flex;
-    justify-content:space-between;
+    align-items: center;
+    gap: 0.8rem;
+    overflow: hidden;
+}
+
+.album-art {
+    width: 50px;
+    height: 50px;
+    border-radius: 4px;
+    object-fit: cover;
+}
+
+.album-details {
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+.album-title {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: #fff;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.album-artist {
+    font-size: 0.72rem;
+    color: #a7a7a7;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    margin-top: 2px;
+}
+
+.player {
+    width: 50%;
+    display: flex;
+    flex-direction: column;
     align-items: center;
 }
 
-
-.album{
+.control {
     width: 25%;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
 }
 
-.player{
-    width: 50%;
-}
-.player-controls{
+.player-controls {
     display: flex;
     justify-content: center;
     align-items: center;
 }
-.contros{
-    width: 25%;
-}
 
-.player-control-icon{
-    height:1rem;
+.player-control-icon {
+    height: 1rem;
     margin-right: 1.7rem;
     opacity: 0.7;
+    cursor: pointer;
+    transition: opacity 0.2s;
 }
 
-.player-control-icon:hover{
+.player-control-icon:hover {
     opacity: 1;
 }
 
-.playback-bar{
+.player-control-icon.active {
+    opacity: 1;
+    filter: drop-shadow(0 0 5px #1bd760);
+}
+
+.playback-bar {
+    width: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
-.progress-bar{
+.current-time, .tot-time {
+    font-size: 0.72rem;
+    color: #a7a7a7;
+    min-width: 36px;
+    text-align: center;
+}
+
+.progress-bar {
     width: 70%;
-    /* height: 2px; */
     appearance: none;
     background-color: transparent;
     cursor: pointer;
+    margin: 0 0.5rem;
 }
 
-
-.progress-bar::-webkit-slider-runnable-track{
-    background-color: #ddd;
+.progress-bar::-webkit-slider-runnable-track {
+    background-color: #555;
     border-radius: 100px;
-    height: 0.2rem;
+    height: 0.25rem;
 }
 
-
-.progress-bar::-webkit-slider-thumb{
+.progress-bar::-webkit-slider-thumb {
     appearance: none;
-    height: 1rem;
-    width: 1rem;
+    height: 0.85rem;
+    width: 0.85rem;
     background-color: #1bd760;
     border-radius: 50%;
-    margin-top:-6px;
+    margin-top: -5px;
 }
